@@ -1,18 +1,38 @@
-def tower_of_hanoi(n, source, auxiliary, destination):
-    # Base case: if only one disk, move it from source to destination
-    if n == 1:
-        print(f"Move disk 1 from {source} to {destination}")
-        return
+# Define a class for the Node
+class Node:
+    def __init__(self, data):
+        self.data = data  # data in the node
+        self.next = None  # pointer to the next node
 
-    # Move n-1 disks from source to auxiliary, using destination as auxiliary
-    tower_of_hanoi(n - 1, source, destination, auxiliary)
+# Define a class for the LinkedList
+class LinkedList:
+    def __init__(self):
+        self.head = None  # initially, the list is empty
 
-    # Move the nth disk from source to destination
-    print(f"Move disk {n} from {source} to {destination}")
+    # Add a new node at the end
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:  # If the list is empty
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:  # Traverse to the last node
+            last = last.next
+        last.next = new_node  # Update the next of the last node to the new node
 
-    # Move n-1 disks from auxiliary to destination, using source as auxiliary
-    tower_of_hanoi(n - 1, auxiliary, source, destination)
+    # Print the linked list
+    def print_list(self):
+        temp = self.head
+        while temp:  # Traverse through the list
+            print(temp.data, end=" -> ")
+            temp = temp.next
+        print("None")
 
-# Example usage:
-n = 3  # Number of disks
-tower_of_hanoi(n, 'A', 'B', 'C')
+# Create a LinkedList and append nodes to it
+linked_list = LinkedList()
+linked_list.append(1)
+linked_list.append(2)
+linked_list.append(3)
+
+# Print the linked list
+linked_list.print_list()
